@@ -51,7 +51,7 @@ su - tsec
 
 ## 4️⃣ Install T-Pot
 
-# Clone the official T-Pot repository
+### Clone the official T-Pot repository
 ```bash
 git clone https://github.com/telekom-security/tpotce
 ```
