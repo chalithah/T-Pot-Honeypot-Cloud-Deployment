@@ -27,10 +27,12 @@ ssh root@<your_server_ip>
 
 Update the system:
 
+```bash
 apt update && apt upgrade -y
 
 Install Git:
 
+```bash
 apt install git -y
 
 ---
@@ -39,11 +41,14 @@ apt install git -y
 T-Pot must be installed as a regular user.
 
 # Create new user
+```bash
 adduser tsec
 
 # Add to sudo group
+```bash
 usermod -aG sudo tsec
 
 # Switch to the new user
+```bash
 su - tsec
 
