@@ -1,88 +1,85 @@
-# 🛡️ T-Pot Honeypot Deployment on Vultr (Ubuntu 24.04)
+# T-Pot Honeypot Deployment Guide
 
-This project documents the secure deployment of the [T-Pot Honeypot Platform](https://github.com/telekom-security/tpotce) on a Vultr cloud instance using Ubuntu 24.04 LTS. The honeypot collects, analyzes, and visualizes real-world cyberattacks through Docker-based sensors and Kibana dashboards.
-
----
+This project documents the secure deployment of the T-Pot Honeypot([https://www.vultr.com/](https://github.security.telekom.com/2024/04/honeypot-tpot-24.04-released.html#get-and-install-t-pot)) Platform on a Vultr cloud instance using Ubuntu 24.04 LTS. The honeypot collects, analyzes, and visualizes real-world cyberattacks through Docker-based sensors and Kibana dashboards.
 
 ## 1️⃣ Provision the Vultr Server
 
-1. Go to [Vultr](https://www.vultr.com/)
-2. Choose **Cloud Compute**
-3. Select **Ubuntu 24.04 LTS x64**
-4. Choose a plan with at least:
-   - 6 GB RAM  
-   - 2 vCPUs  
-   - 128 GB SSD  
-5. Add your **SSH key**
-6. Click **Deploy**
-
----
+# Launch a cloud instance on Vultr
+1. Log in to [Vultr](https://www.vultr.com/)
+2. Choose "Cloud Compute"
+3. Select "Ubuntu 24.04 LTS x64"
+4. Pick a server plan:
+   - 6 GB RAM
+   - 2+ vCPUs
+   - 128 GB SSD
+5. Add your public SSH key
+6. Click "Deploy"
 
 ## 2️⃣ Initial Setup (as Root)
 
-SSH into your new server:
-
+# SSH into the cloud instance
 ```bash
 ssh root@<your_server_ip>
 ```
 
-Update and upgrade the system:
-
+# Update and upgrade the system
 ```bash
 apt update && apt upgrade -y
 ```
 
-Install Git:
-
+# Install Git version control
 ```bash
 apt install git -y
 ```
 
----
-
 ## 3️⃣ Create a Non-Root User for T-Pot
 
-Create a secure user to run the honeypot platform:
-
+# Create a new user to run T-Pot
 ```bash
 adduser tsec
+```
+
+# Give the new user sudo privileges
+```bash
 usermod -aG sudo tsec
+```
+
+# Switch to the newly created user
+```bash
 su - tsec
 ```
 
----
-
 ## 4️⃣ Install T-Pot
 
-Clone the T-Pot repository and run the installer:
-
+# Clone the official T-Pot repository
 ```bash
 git clone https://github.com/telekom-security/tpotce
+```
+
+# Navigate into the T-Pot directory
+```bash
 cd tpotce
+```
+
+# Run the T-Pot installation script in user mode
+```bash
 ./install.sh --type=user
 ```
 
-- Choose the **Standard** installation when prompted.
-- Set a strong password for the web UI.
-
----
+# Select 'Standard' installation when prompted and set a secure password.
 
 ## 5️⃣ Reboot the Server
 
-After installation:
-
+# After install, reboot and wait for T-Pot to initialize
 ```bash
 reboot
 ```
 
-> ⚠️ The first boot may take 5–10 minutes while containers initialize.
-
----
+Note: First boot may take 5–10 minutes.
 
 ## 6️⃣ Configure Vultr Firewall
 
-Create inbound rules in your Vultr firewall group:
-
+# Allow only necessary traffic into the server
 | Action | Protocol | Ports       | Source     | Description                                 |
 |--------|----------|-------------|------------|---------------------------------------------|
 | Accept | TCP      | 1–65535     | 0.0.0.0/0  | Allow all TCP traffic for honeypots         |
@@ -90,44 +87,24 @@ Create inbound rules in your Vultr firewall group:
 | Accept | TCP      | 64294–64297 | 0.0.0.0/0  | Access to Web UI, Kibana, and Admin         |
 | Drop   | Any      | All         | 0.0.0.0/0  | Block all other traffic                     |
 
-
----
-
 ## 7️⃣ Access the Dashboards
 
-Once the system is up, open the following URLs in your browser:
-
+# Web interfaces for monitoring honeypot activity
 - T-Pot Admin UI: `https://<your-ip>:64294`
 - Kibana Dashboard: `https://<your-ip>:64297/kibana`
 - Real-Time Map: `https://<your-ip>:64297/map/`
 
-> 🔒 Note: Accept the browser warning for self-signed certificates.
-
----
+Note: Accept browser warning for self-signed certificate.
 
 ## ✅ Done!
 
-Your honeypot is now live, collecting real-world attack data and exposing it via rich dashboards. This project demonstrates:
-
-- Cloud infrastructure setup on Vultr
-- Secure firewall configuration
-- Honeypot monitoring using Elastic Stack
-- DevSecOps operational deployment
-
----
+# Your honeypot is now live and collecting attack data.
 
 ## 📘 Next Steps
 
-- [ ] Analyze logs with custom scripts
-- [ ] Integrate alerts or reports
-- [ ] Lock down admin access with VPN or IP whitelisting
-- [ ] Export logs to SIEM (Splunk, Sentinel, etc.)
+- Review Kibana analytics dashboard
+- Automate log exports using Bash or Python
+- Secure access with IP whitelisting or VPN
 
 ---
-
-## 👤 Author
-
-**Chalitha Handapangoda**  
-Cloud Security | DevSecOps | Honeypots | AWS  
-🔗 [LinkedIn](https://www.linkedin.com/in/chalitha-handapangoda/) • 📝 [Medium](https://chalithah.medium.com)
 
