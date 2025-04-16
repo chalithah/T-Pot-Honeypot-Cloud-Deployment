@@ -25,6 +25,8 @@ SSH into the server:
 ```bash
 ssh root@<your_server_ip>
 
+---
+
 Update the system:
 
 ```bash
