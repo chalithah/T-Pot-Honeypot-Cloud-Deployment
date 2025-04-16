@@ -44,7 +44,7 @@ adduser tsec
 usermod -aG sudo tsec
 ```
 
-# Switch to the newly created user
+### Switch to the newly created user
 ```bash
 su - tsec
 ```
@@ -79,7 +79,7 @@ Note: First boot may take 5–10 minutes.
 
 ## 6️⃣ Configure Vultr Firewall
 
-# Allow only necessary traffic into the server
+### Allow only necessary traffic into the server
 | Action | Protocol | Ports       | Source     | Description                                 |
 |--------|----------|-------------|------------|---------------------------------------------|
 | Accept | TCP      | 1–65535     | 0.0.0.0/0  | Allow all TCP traffic for honeypots         |
@@ -89,7 +89,7 @@ Note: First boot may take 5–10 minutes.
 
 ## 7️⃣ Access the Dashboards
 
-# Web interfaces for monitoring honeypot activity
+### Web interfaces for monitoring honeypot activity
 - T-Pot Admin UI: `https://<your-ip>:64294`
 - Kibana Dashboard: `https://<your-ip>:64297/kibana`
 - Real-Time Map: `https://<your-ip>:64297/map/`
@@ -98,7 +98,7 @@ Note: Accept browser warning for self-signed certificate.
 
 ## ✅ Done!
 
-# Your honeypot is now live and collecting attack data.
+### honeypot is now live and collecting attack data.
 
 ## 📘 Next Steps
 
