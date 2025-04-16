@@ -18,7 +18,7 @@ This guide explains how to securely deploy the [T-Pot Honeypot Platform](https:/
 
 ---
 
-#### 2️⃣ Initial Setup (as Root)
+## 2️⃣ Initial Setup (as Root)
 
 1. Go to [Vultr](https://www.vultr.com/)
 2. Choose **Cloud Compute** as server type
