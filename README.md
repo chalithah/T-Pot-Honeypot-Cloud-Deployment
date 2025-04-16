@@ -17,29 +17,29 @@ This project documents the secure deployment of the T-Pot Honeypot([https://www.
 
 ## 2️⃣ Initial Setup (as Root)
 
-# SSH into the cloud instance
+### SSH into the cloud instance
 ```bash
 ssh root@<your_server_ip>
 ```
 
-# Update and upgrade the system
+### Update and upgrade the system
 ```bash
 apt update && apt upgrade -y
 ```
 
-# Install Git version control
+### Install Git version control
 ```bash
 apt install git -y
 ```
 
 ## 3️⃣ Create a Non-Root User for T-Pot
 
-# Create a new user to run T-Pot
+### Create a new user to run T-Pot
 ```bash
 adduser tsec
 ```
 
-# Give the new user sudo privileges
+### Give the new user sudo privileges
 ```bash
 usermod -aG sudo tsec
 ```
@@ -56,21 +56,21 @@ su - tsec
 git clone https://github.com/telekom-security/tpotce
 ```
 
-# Navigate into the T-Pot directory
+### Navigate into the T-Pot directory
 ```bash
 cd tpotce
 ```
 
-# Run the T-Pot installation script in user mode
+### Run the T-Pot installation script in user mode
 ```bash
 ./install.sh --type=user
 ```
 
-# Select 'Standard' installation when prompted and set a secure password.
+### Select 'Standard' installation when prompted and set a secure password.
 
 ## 5️⃣ Reboot the Server
 
-# After install, reboot and wait for T-Pot to initialize
+### After install, reboot and wait for T-Pot to initialize
 ```bash
 reboot
 ```
