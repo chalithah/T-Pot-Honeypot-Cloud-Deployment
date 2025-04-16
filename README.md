@@ -25,3 +25,25 @@ SSH into the server:
 ```bash
 ssh root@<your_server_ip>
 
+Update the system:
+
+apt update && apt upgrade -y
+
+Install Git:
+
+apt install git -y
+
+---
+
+## 3️⃣ Create a Non-Root User for T-Pot
+T-Pot must be installed as a regular user.
+
+# Create new user
+adduser tsec
+
+# Add to sudo group
+usermod -aG sudo tsec
+
+# Switch to the new user
+su - tsec
+
