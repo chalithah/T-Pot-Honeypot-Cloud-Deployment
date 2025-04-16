@@ -40,17 +40,16 @@ apt install git -y
 ---
 
 ## 3️⃣ Create a Non-Root User for T-Pot
-T-Pot must be installed as a regular user.
 
-# Create new user
-```bash
+T-Pot must be installed as a non-root user:
+
+# Create a new user
 adduser tsec
 
-# Add to sudo group
-```bash
+# Grant sudo access
 usermod -aG sudo tsec
 
 # Switch to the new user
-```bash
 su - tsec
+
 
