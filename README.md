@@ -4,21 +4,6 @@ This project documents the secure deployment of the [T-Pot Honeypot Platform](ht
 
 ---
 
-## 🧰 Prerequisites
-
-Make sure you have:
-
-- A [Vultr](https://www.vultr.com/) account
-- SSH key pair for server access
-- Stable, non-proxied internet connection
-- Ubuntu Server 24.04 LTS (64-bit)
-- Minimum server specs:
-  - 6 GB RAM
-  - 2 vCPUs
-  - 128 GB SSD
-
----
-
 ## 1️⃣ Provision the Vultr Server
 
 1. Go to [Vultr](https://www.vultr.com/)
@@ -105,7 +90,6 @@ Create inbound rules in your Vultr firewall group:
 | Accept | TCP      | 64294–64297 | 0.0.0.0/0  | Access to Web UI, Kibana, and Admin         |
 | Drop   | Any      | All         | 0.0.0.0/0  | Block all other traffic                     |
 
-📌 _Optional: Restrict admin access to your IP instead of `0.0.0.0/0`._
 
 ---
 
@@ -147,8 +131,3 @@ Your honeypot is now live, collecting real-world attack data and exposing it via
 Cloud Security | DevSecOps | Honeypots | AWS  
 🔗 [LinkedIn](https://www.linkedin.com/in/chalitha-handapangoda/) • 📝 [Medium](https://chalithah.medium.com)
 
----
-
-## 🪪 License
-
-MIT — for educational and professional portfolio use.
