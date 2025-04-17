@@ -123,8 +123,14 @@ Using the Kibana dashboard and raw log discovery:
   - ICMP communication issues
   - Suspicious stream reassembly sequences
 
+📸 Kibana Dashboard
+![Elastic Dashboard](images/Kibana_dashboard.png)
+
+📸 Attack Map
+![Elastic Dashboard](images/attack_map.png)
+
 📸 Suricata Alerts & KQL Discovery:
-![Suricata Alerts](images/kql-discovery.png)
+![Elastic Dashboard](images/logstash.png)
 
 ---
 
