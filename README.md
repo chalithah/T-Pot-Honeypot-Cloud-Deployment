@@ -80,6 +80,7 @@ reboot
 | Accept | TCP      | 64294–64297 | 0.0.0.0/0  | Access to Web UI, Kibana, and Admin         |
 | Drop   | Any      | All         | 0.0.0.0/0  | Block all other traffic                     |
 
+![Elastic Dashboard](images/firewall_rules.png)
 ---
 
 ### 7️⃣ Access the Dashboards
