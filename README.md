@@ -22,10 +22,10 @@ The goal of this project is to observe common attack patterns on exposed cloud i
 3. Choose **Ubuntu 24.04 LTS x64** as the OS
 4. Allocate at least:
    - 16 GB RAM
-   - 350 GB SSD
+   - 320 GB SSD
 5. Add your **SSH public key** for secure access
 6. Deploy the server and note the public IP address
-
+![Elastic Dashboard](images/deploy_server.png)
 ---
 
 ### 2️⃣ Initial Setup (as Root)
