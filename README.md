@@ -1,38 +1,30 @@
 # 🛡️ T-Pot Honeypot Cloud Deployment Project
 
-This project documents the secure deployment of the [T-Pot Honeypot](https://github.com/telekom-security/tpotce) Platform on a Vultr cloud instance using Ubuntu 24.04 LTS. The honeypot collects, analyzes, and visualizes real-world cyberattacks through Docker-based sensors and Kibana dashboards.
+This project documents the deployment of the [T-Pot Honeypot](https://github.com/telekom-security/tpotce) platform on a cloud-hosted Ubuntu 24.04 LTS server. T-Pot is a multi-container honeypot system that collects, analyzes, and visualizes real-world cyberattacks using Docker-based sensors and the ELK (Elastic) Stack.
+
+In this project, I deployed T-Pot on a **Vultr Cloud** instance, but the same setup can be reproduced on **AWS EC2**, **Azure VM**, or any other public cloud provider supporting Ubuntu 24.04 LTS.
 
 ![Elastic Dashboard](images/elastic_dashboard.png)
 ---
 
 ## 🎯 Objective
 
-The goal of this project is to observe common attack patterns on exposed cloud infrastructure. By running T-Pot in a controlled Vultr environment, I collected real-world threat data and analyzed it to gain insights on how attackers behave in the wild—especially relevant to airport and critical infrastructure security.
+The goal of this project is to observe common attack patterns on exposed cloud infrastructure. By running T-Pot in a controlled Vultr environment, I collected real-world threat data and analyzed it to gain insights on how attackers behave in the wild, especially relevant to airport and critical infrastructure security.
 
 ---
 
-## 🛠️ Setup
+## 🛠️ Setup - Deployment Instructions
 
-### Vultr Instance Configuration
+### 1️⃣ Provision the Ubuntu Server
 
-- OS: Ubuntu 24.04 LTS x64
-- RAM: 16 GB
-- SSD: 350 GB
-- Region: Atlanta (Vultr)
-- SSH: Key-based access only
-
----
-
-## 🔧 Deployment Instructions
-
-### 1️⃣ Provision the Vultr Server
-
-1. Log in to [Vultr](https://www.vultr.com/)
-2. Choose **Cloud Compute**
-3. Select **Ubuntu 24.04 LTS x64**
-4. Select a plan: 16 GB RAM, 350 GB SSD
-5. Add your **SSH key**
-6. Click **Deploy**
+1. Go to your preferred cloud provider (e.g., [Vultr](https://www.vultr.com/), AWS EC2, Azure, DigitalOcean)
+2. Create a new virtual machine (VM) or instance
+3. Choose **Ubuntu 24.04 LTS x64** as the OS
+4. Allocate at least:
+   - 16 GB RAM
+   - 350 GB SSD
+5. Add your **SSH public key** for secure access
+6. Deploy the server and note the public IP address
 
 ---
 
