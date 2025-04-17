@@ -109,43 +109,50 @@ reboot
 
 ---
 
-## 📈 Findings – First 24 Hours
+## 📈 Findings (First 24 Hours)
 
-Collected insights using Elastic Stack visualizations:
+Using the Kibana dashboard and raw log discovery:
 
-- **45,000+ attacks** observed in under 24 hours
-- **Top honeypots hit**: Cowrie (SSH), Dionaea, Honeytrap
-- **Brute force usernames**: `root`, `admin`, `ubuntu`, `oracle`
-- **Passwords tried**: `123456`, `admin123`, `Password1`, `ubuntu123`
-- **Top IPs** from Iran, France, US, Netherlands
-- **Suricata alerts** flagged:
+- Over **45,000 attacks** detected in 24 hours
+- Top services targeted:
+  - Cowrie (SSH) – brute force attempts
+  - Dionaea – attempts to push malware payloads
+- Common attacker usernames: `root`, `admin`, `ubuntu`, `oracle`
+- Passwords attempted: `123456`, `admin123`, `password`, `1234`
+- Majority of attacker IPs originated from:
+  - 🇮🇷 Iran
+  - 🇺🇸 United States
+  - 🇫🇷 France
+  - 🇳🇱 The Netherlands
+- Suricata Alerts:
   - IPv4 truncated packets
-  - ICMP message anomalies
-  - Suspicious TCP retransmissions
+  - ICMP communication issues
+  - Suspicious stream reassembly sequences
 
-📸 Screenshots:
-
-![Dashboard Summary](images/elastic-dashboard.png)
-![Service Distribution](images/elastic-dashboard2.png)
-![Raw Log View](images/kql-discovery.png)
+📸 Suricata Alerts & KQL Discovery:
+![Suricata Alerts](images/kql-discovery.png)
 
 ---
 
 ## ✈️ Takeaways
 
-- Infrastructure is scanned immediately upon exposure
-- SSH remains a primary attack vector
-- Public honeypots offer great learning for blue teams
-- Highlights the importance of layered defense for high-risk targets (e.g., airports)
+This deployment simulated what happens when infrastructure is exposed on the public internet. Key insights:
+
+- 🕐 Attacks began within minutes of deployment — **internet-facing services are always watched**
+- 🧠 Brute force attempts and opportunistic malware delivery dominate early-stage threats
+- ✈️ Lessons here directly tie to airport/critical infrastructure security:
+  - Isolated systems must never be internet-exposed without layered defenses
+  - Log collection, analysis, and alerting are critical
+  - Honeypots can safely simulate and test defenses
 
 ---
 
 ## 📘 What's Next
 
-- Automate log archival and alerting
-- Correlate attacks with threat intelligence feeds
-- Weekly reports from dashboards
-- Integration with SIEM platforms
+- Automate log archival and alerting (e.g., Slack notifications)
+- Add threat enrichment using public IP blacklists
+- Explore integration with a SIEM like Splunk or Microsoft Sentinel
+- Visualize trends weekly to observe attacker shifts
 
 ---
 
@@ -157,4 +164,8 @@ Cloud & Security Enthusiast
 📝 [Medium](https://chalithah.medium.com)
 
 
+---
 
+## 🪪 License
+
+MIT License — free to use for learning and demonstration purposes.
