@@ -113,7 +113,7 @@ Using the Kibana dashboard and raw log discovery:
   - Dionaea – attempts to push malware payloads
 - Common attacker usernames: `root`, `admin`, `ubuntu`, `oracle`
 - Passwords attempted: `123456`, `admin123`, `password`, `1234`
-- Majority of attacker IPs originated from:
+- Majority of attacker IPs originated from: 
   - 🇮🇷 Iran
   - 🇺🇸 United States
   - 🇫🇷 France
