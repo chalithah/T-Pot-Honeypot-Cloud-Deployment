@@ -162,10 +162,3 @@ This deployment simulated what happens when infrastructure is exposed on the pub
 Cloud & Security Enthusiast  
 🔗 [LinkedIn](https://www.linkedin.com/in/chalitha-handapangoda/)  
 📝 [Medium](https://chalithah.medium.com)
-
-
----
-
-## 🪪 License
-
-MIT License — free to use for learning and demonstration purposes.
