@@ -2,7 +2,8 @@
 
 This project documents the secure deployment of the [T-Pot Honeypot](https://github.com/telekom-security/tpotce) Platform on a Vultr cloud instance using Ubuntu 24.04 LTS. The honeypot collects, analyzes, and visualizes real-world cyberattacks through Docker-based sensors and Kibana dashboards.
 ## 📊 Dashboard View
-![Elastic Dashboard]([images/elastic dashboard.png](https://github.com/chalithah/T-Pot-Honeypot-Cloud-Deployment/blob/4f8db4cd9e13843d317fff556359b0ec2b9a5b05/images/elastic%20dashboard.png))
+
+![Elastic Dashboard](images/elastic_dashboard.png)
 ---
 
 ## 🎯 Objective
