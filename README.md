@@ -1,6 +1,6 @@
 # T-Pot Honeypot Cloud Deployment Project
 
-This project documents the secure deployment of the T-Pot Honeypot([https://www.vultr.com/](https://github.security.telekom.com/2024/04/honeypot-tpot-24.04-released.html#get-and-install-t-pot)) Platform on a Vultr cloud instance using Ubuntu 24.04 LTS. The honeypot collects, analyzes, and visualizes real-world cyberattacks through Docker-based sensors and Kibana dashboards.
+This project documents the secure deployment of the ([T-Pot Honeypot](https://github.com/telekom-security/tpotce)) Platform on a Vultr cloud instance using Ubuntu 24.04 LTS. The honeypot collects, analyzes, and visualizes real-world cyberattacks through Docker-based sensors and Kibana dashboards.
 
 ## 1️⃣ Provision the Vultr Server
 
