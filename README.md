@@ -9,9 +9,8 @@ This project documents the secure deployment of the ([T-Pot Honeypot](https://gi
 2. Choose "Cloud Compute"
 3. Select "Ubuntu 24.04 LTS x64"
 4. Pick a server plan:
-   - 6 GB RAM
-   - 2+ vCPUs
-   - 128 GB SSD
+   - 16 GB RAM
+   - 350 GB SSD
 5. Add your public SSH key
 6. Click "Deploy"
 
