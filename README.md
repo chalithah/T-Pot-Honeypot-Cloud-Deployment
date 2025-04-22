@@ -107,21 +107,26 @@ reboot
 
 Using the Kibana dashboard and raw log discovery:
 
-- Over **45,000 attacks** detected in 24 hours
-- Top services targeted:
-  - Cowrie (SSH) – brute force attempts
-  - Dionaea – attempts to push malware payloads
-- Common attacker usernames: `root`, `admin`, `ubuntu`, `oracle`
-- Passwords attempted: `123456`, `admin123`, `password`, `1234`
-- Majority of attacker IPs originated from: 
-  - 🇮🇷 Iran
+- **Total Honeypot Hits**: Over **446,000** attack attempts
+- **Top Services Targeted**:
+  - `Sentrypeer` – 257k
+  - `Honeytrap` – 95k
+  - `Cowrie` (SSH) – 54k
+  - `Dionaea` (malware) – 32k
+- **Common Usernames**: `root`, `admin`, `ubuntu`, `oracle`, `postgres`
+- **Most Frequent Passwords**: `123456`, `Password123!`, `admin123`, `P@ssw0rd`, `Huawei@123`, `qwer1234`, `(empty)`
+- **Suricata Alerts**:
+  - IPv4 truncated packets (188k)
+  - Stream reassembly gaps (103k)
+  - Broken TCP ACKs and invalid packets
+- **Top Attacking Countries**:
+  - 🇷🇴 Romania
   - 🇺🇸 United States
   - 🇫🇷 France
-  - 🇳🇱 The Netherlands
-- Suricata Alerts:
-  - IPv4 truncated packets
-  - ICMP communication issues
-  - Suspicious stream reassembly sequences
+  - 🇨🇳 China
+  - 🇧🇬 Bulgaria
+- **Attacker Types**: Known scanners, anonymizers, botnets, Tor exit nodes
+- **Most Common Ports Scanned**: 5060, 445, 443, 22, 23
 
 📸 Kibana Dashboard
 ![Elastic Dashboard](images/Kibana_dashboard.png)
@@ -136,23 +141,23 @@ Using the Kibana dashboard and raw log discovery:
 
 ## ✈️ Takeaways
 
-This deployment simulated what happens when infrastructure is exposed on the public internet. Key insights:
+This deployment confirmed that exposing unprotected infrastructure on the internet results in immediate and sustained targeting from global threat actors. Key lessons:
 
-- 🕐 Attacks began within minutes of deployment — **internet-facing services are always watched**
-- 🧠 Brute force attempts and opportunistic malware delivery dominate early-stage threats
-- ✈️ Lessons here directly tie to airport/critical infrastructure security:
-  - Isolated systems must never be internet-exposed without layered defenses
-  - Log collection, analysis, and alerting are critical
-  - Honeypots can safely simulate and test defenses
+- 🕒 **Immediate Targeting**: Attack attempts began within minutes of exposure, emphasizing the importance of default hardening before public deployment.
+- 🔐 **Credential Abuse is Rampant**: The volume of SSH brute-force attempts and reused default passwords (like `123456`, `root`, and `admin`) indicates widespread scanning automation.
+- 🌐 **Diverse Threat Actors**: Attacks originated from a wide range of IPs across multiple continents, with notable ASNs like OVH, Amazon, and cloud VPN exit nodes.
+- 🧪 **Honeypots Are Effective Simulators**: T-Pot provided valuable, low-risk visibility into attacker tactics, tools, and patterns—critical for blue teams and SOC analysts.
+- ✈️ **Relevance to Critical Infrastructure**: For sectors like aviation, energy, and healthcare, exposing even a misconfigured service can act as a beacon for attackers. This reinforces the need for layered defense, traffic monitoring, and least privilege configurations.
 
 ---
 
-## 📘 What's Next
+## 📘 What’s Next
 
-- Automate log archival and alerting (e.g., Slack notifications)
-- Add threat enrichment using public IP blacklists
-- Explore integration with a SIEM like Splunk or Microsoft Sentinel
-- Visualize trends weekly to observe attacker shifts
+- 📦 **Automate Log Archival**: Set up cron jobs or Logstash pipelines to back up logs daily to an S3 bucket or cloud storage.
+- 🚨 **Enable Real-Time Alerting**: Integrate Slack, Microsoft Teams, or email alerts using Suricata or Filebeat.
+- 🧠 **Enrich Threat Data**: Correlate IPs against public blocklists (AbuseIPDB, AlienVault OTX, etc.) to improve context.
+- 📊 **Trend Reporting**: Build weekly dashboards to analyze shifts in attacker behavior and attack surface targeting.
+- 🔗 **SIEM Integration**: Export logs to Splunk, Sentinel, or Wazuh to enhance threat hunting capabilities.
 
 ---
 
