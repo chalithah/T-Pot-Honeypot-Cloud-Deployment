@@ -131,6 +131,9 @@ Using the Kibana dashboard and raw log discovery:
 📸 Kibana Dashboard
 ![Elastic Dashboard](images/Kibana_dashboard.png)
 
+📸 Honeytrap Dashboard
+![Elastic Dashboard](images/Kibana_dashboard2.png)
+
 📸 Attack Map
 ![Elastic Dashboard](images/attack_map.png)
 
