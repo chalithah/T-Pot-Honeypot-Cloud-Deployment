@@ -4,6 +4,7 @@ This project documents the deployment of a high-interaction honeypot on a cloud-
 
 Initially deployed on **Vultr Cloud**, this setup is cloud-agnostic and can be reproduced on **AWS**, **Azure**, or any public cloud provider supporting Ubuntu 24.04 LTS.
 
+![Elastic Summary](images/elastic_dashboard.png)
 ---
 
 ## 🎯 Objective
@@ -116,7 +117,6 @@ After one month of continuous operation, the honeypot captured:
 
 📸 Kibana Dashboards and Threat Maps:
 
-![Elastic Summary](images/elastic_dashboard.png)
 ![Kibana Overview](images/Kibana_dashboard.png)
 ![Kibana Extended](images/Kibana_dashboard2.png)
 ![Attack Map](images/attack_map.png)
