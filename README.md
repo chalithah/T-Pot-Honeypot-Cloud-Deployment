@@ -103,7 +103,7 @@ reboot
 
 ---
 
-## 📈 Findings (First 24 Hours)
+## 📈 Findings (After 5 days of deployment)
 
 Using the Kibana dashboard and raw log discovery:
 
