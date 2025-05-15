@@ -118,8 +118,11 @@ After one month of continuous operation, the honeypot captured:
 📸 Kibana Dashboards and Threat Maps:
 
 ![Kibana Overview](images/Kibana_dashboard.png)
+📸 Honeytrap Dashboard:
 ![Kibana Extended](images/Kibana_dashboard2.png)
+📸 Attack Map:
 ![Attack Map](images/attack_map.png)
+📸 Suricata Alerts & KQL Discovery:
 ![Log Discovery](images/logstash.png)
 
 ---
