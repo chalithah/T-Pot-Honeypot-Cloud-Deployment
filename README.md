@@ -1,31 +1,29 @@
 # 🛡️ T-Pot Honeypot Cloud Deployment Project
 
-This project documents the deployment of the [T-Pot Honeypot](https://github.com/telekom-security/tpotce) platform on a cloud-hosted Ubuntu 24.04 LTS server. T-Pot is a multi-container honeypot system that collects, analyzes, and visualizes real-world cyberattacks using Docker-based sensors and the ELK (Elastic) Stack.
+This project documents the deployment of a high-interaction honeypot on a cloud-hosted Ubuntu 24.04 LTS server. The honeypot system collects, analyzes, and visualizes real-world cyberattacks using Docker-based sensors and the ELK (Elastic) Stack.
 
-In this project, I deployed T-Pot on a **Vultr Cloud** instance, but the same setup can be reproduced on **AWS EC2**, **Azure VM**, or any other public cloud provider supporting Ubuntu 24.04 LTS.
+Initially deployed on **Vultr Cloud**, this setup is cloud-agnostic and can be reproduced on **AWS**, **Azure**, or any public cloud provider supporting Ubuntu 24.04 LTS.
 
-![Elastic Dashboard](images/elastic_dashboard.png)
 ---
 
 ## 🎯 Objective
 
-The goal of this project is to observe common attack patterns on exposed cloud infrastructure. By running T-Pot in a controlled Vultr environment, I collected real-world threat data and analyzed it to gain insights on how attackers behave in the wild, especially relevant to airport and critical infrastructure security.
+The goal of this project was to study global cyberattack patterns on exposed infrastructure. By simulating a publicly accessible cloud server, I was able to safely observe attacker behavior, analyze threat types, and evaluate the effectiveness of a hardened logging environment.
 
 ---
 
-## 🛠️ Setup - Deployment Instructions
+## 🛠️ Setup – Deployment Instructions
 
 ### 1️⃣ Provision the Ubuntu Server
 
-1. Go to your preferred cloud provider (e.g., [Vultr](https://www.vultr.com/), AWS EC2, Azure, DigitalOcean)
-2. Create a new virtual machine (VM) or instance
-3. Choose **Ubuntu 24.04 LTS x64** as the OS
-4. Allocate at least:
-   - 16 GB RAM
-   - 320 GB SSD
-5. Add your **SSH public key** for secure access
-6. Deploy the server and note the public IP address
-![Elastic Dashboard](images/deploy_server.png)
+1. Use a cloud provider (e.g., [Vultr](https://www.vultr.com/), AWS, Azure, DigitalOcean)
+2. Deploy an instance with:
+   - **Ubuntu 24.04 LTS x64**
+   - **16 GB RAM**
+   - **320 GB SSD**
+3. Add your SSH key for secure login
+4. Deploy and note the public IP
+
 ---
 
 ### 2️⃣ Initial Setup (as Root)
@@ -38,7 +36,7 @@ apt install git -y
 
 ---
 
-### 3️⃣ Create a Non-Root User for T-Pot
+### 3️⃣ Create a Non-Root User
 
 ```bash
 adduser tsec
@@ -48,7 +46,7 @@ su - tsec
 
 ---
 
-### 4️⃣ Install T-Pot
+### 4️⃣ Install the Honeypot System
 
 ```bash
 git clone https://github.com/telekom-security/tpotce
@@ -56,117 +54,111 @@ cd tpotce
 ./install.sh --type=user
 ```
 
-- Select **Standard** installation
-- Set a secure password for access
+- Select `Standard` during install
+- Set secure credentials when prompted
 
 ---
 
-### 5️⃣ Reboot the Server
+### 5️⃣ Reboot and Configure
 
 ```bash
 reboot
 ```
 
-> ⚠️ First boot may take 5–10 minutes to initialize all containers.
+First boot may take 5–10 minutes to complete container setup.
 
 ---
 
-### 6️⃣ Configure Vultr Firewall
+### 6️⃣ Cloud Firewall Settings
 
-| Action | Protocol | Ports       | Source     | Description                                 |
-|--------|----------|-------------|------------|---------------------------------------------|
-| Accept | TCP      | 1–65535     | 0.0.0.0/0  | Allow all TCP traffic for honeypots         |
-| Accept | UDP      | 1–65535     | 0.0.0.0/0  | Allow all UDP traffic for honeypots         |
-| Accept | TCP      | 64294–64297 | 0.0.0.0/0  | Access to Web UI, Kibana, and Admin         |
-| Drop   | Any      | All         | 0.0.0.0/0  | Block all other traffic                     |
+| Action | Protocol | Ports       | Source     | Purpose                              |
+|--------|----------|-------------|------------|--------------------------------------|
+| Accept | TCP      | 1–65535     | 0.0.0.0/0  | Honeypot exposure (TCP)              |
+| Accept | UDP      | 1–65535     | 0.0.0.0/0  | Honeypot exposure (UDP)              |
+| Accept | TCP      | 64294–64297 | 0.0.0.0/0  | Admin/Kibana UI access               |
+| Drop   | Any      | All         | 0.0.0.0/0  | Default deny rule                    |
 
-![Elastic Dashboard](images/firewall_rules.png)
 ---
 
-### 7️⃣ Access the Dashboards
+## 📊 Dashboards
 
-- T-Pot Admin UI → `https://<your-ip>:64294`
-- Kibana Dashboard → `https://<your-ip>:64297/kibana`
-- Attack Map → `https://<your-ip>:64297/map/`
+- Admin UI: `https://<your-ip>:64294`
+- Kibana: `https://<your-ip>:64297/kibana`
+- Real-time map: `https://<your-ip>:64297/map/`
 
-> 🔐 Accept browser warning for self-signed certificate.
+> Accept browser warnings for self-signed certs.
 
 ---
 
 ## 🔐 Security Hardening
 
-- Created non-root user (`tsec`) for deployment
-- Disabled root SSH login and password authentication
-- SSH secured with key-based access only
-- Vultr Cloud Firewall rules applied to restrict traffic
-- UI ports are public but can be locked to IP in production
+- Created a non-root deployment user
+- SSH access restricted to key-only authentication
+- Root login disabled
+- Cloud firewall in place
+- Admin UI ports can be IP-restricted
 
 ---
 
-## 📈 Findings (After 5 days of deployment)
+## 📈 Findings (After 1 Month)
 
-Using the Kibana dashboard and raw log discovery:
+After one month of continuous operation, the honeypot captured:
 
-- **Total Honeypot Hits**: Over **446,000** attack attempts
-- **Top Services Targeted**:
-  - `Sentrypeer` – 257k
-  - `Honeytrap` – 95k
-  - `Cowrie` (SSH) – 54k
-  - `Dionaea` (malware) – 32k
-- **Common Usernames**: `root`, `admin`, `ubuntu`, `oracle`, `postgres`
-- **Most Frequent Passwords**: `123456`, `Password123!`, `admin123`, `P@ssw0rd`, `Huawei@123`, `qwer1234`, `(empty)`
-- **Suricata Alerts**:
-  - IPv4 truncated packets (188k)
-  - Stream reassembly gaps (103k)
-  - Broken TCP ACKs and invalid packets
-- **Top Attacking Countries**:
-  - 🇷🇴 Romania
-  - 🇺🇸 United States
-  - 🇫🇷 France
-  - 🇨🇳 China
-  - 🇧🇬 Bulgaria
-- **Attacker Types**: Known scanners, anonymizers, botnets, Tor exit nodes
-- **Most Common Ports Scanned**: 5060, 445, 443, 22, 23
+- **4+ million attack attempts**
+- **Top targeted services**: Ciscoasa, Sentrypeer, Honeytrap, Cowrie, Dionaea
+- **Frequent usernames**: `root`, `admin`, `administrator`, `AdMin1`
+- **Passwords tried**: `123456`, `P@ssw0rd`, `123qwe`, `(empty)`, `admin123`, `000000`
+- **Top attacker IPs and ASNs**: OVH, DigitalOcean, Xeon LLC, Internet Solutions
+- **Malicious behavior**:
+  - Exploits targeting SSH and SIP
+  - Known C2 behavior and mass scanning bots
+  - Payload attempts on FTP and HTTP honeypots
 
-📸 Kibana Dashboard
-![Elastic Dashboard](images/Kibana_dashboard.png)
+📸 Kibana Dashboards and Threat Maps:
 
-📸 Honeytrap Dashboard
-![Elastic Dashboard](images/Kibana_dashboard2.png)
-
-📸 Attack Map
-![Elastic Dashboard](images/attack_map.png)
-
-📸 Suricata Alerts & KQL Discovery:
-![Elastic Dashboard](images/logstash.png)
+![Elastic Summary](images/elastic_dashboard.png)
+![Kibana Overview](images/Kibana_dashboard.png)
+![Kibana Extended](images/Kibana_dashboard2.png)
+![Attack Map](images/attack_map.png)
+![Log Discovery](images/logstash.png)
 
 ---
 
-## ✈️ Takeaways
+## ✈️ Key Takeaways
 
-This deployment confirmed that exposing unprotected infrastructure on the internet results in immediate and sustained targeting from global threat actors. Key lessons:
-
-- 🕒 **Immediate Targeting**: Attack attempts began within minutes of exposure, emphasizing the importance of default hardening before public deployment.
-- 🔐 **Credential Abuse is Rampant**: The volume of SSH brute-force attempts and reused default passwords (like `123456`, `root`, and `admin`) indicates widespread scanning automation.
-- 🌐 **Diverse Threat Actors**: Attacks originated from a wide range of IPs across multiple continents, with notable ASNs like OVH, Amazon, and cloud VPN exit nodes.
-- 🧪 **Honeypots Are Effective Simulators**: T-Pot provided valuable, low-risk visibility into attacker tactics, tools, and patterns—critical for blue teams and SOC analysts.
-- ✈️ **Relevance to Critical Infrastructure**: For sectors like aviation, energy, and healthcare, exposing even a misconfigured service can act as a beacon for attackers. This reinforces the need for layered defense, traffic monitoring, and least privilege configurations.
+-  Attacks began minutes after deployment  confirming cloud IPs are continuously scanned
+-  Brute force and credential stuffing remain dominant across SSH and FTP
+-  The diversity in payloads and sources demonstrates how broad attacker infrastructure really is
+-  Honeypots are an effective, low-risk method to study and log live threats in action
+-  This experiment models what could happen to improperly secured infrastructure in aviation, healthcare, or industrial control systems
 
 ---
+
+## 🔍 Proactive Defense Use Case
+
+Honeypots aren't just for academic researchthey can serve as early warning systems. By identifying attacker behavior and payloads before they reach production systems, defenders can:
+
+-  Preemptively block IPs at the firewall level  
+-  Generate custom IOC signatures for IDS/SIEM platforms  
+-  Share insights with threat intel feeds  
+-  Test detection rules for red team simulations
+
+Integrating honeypot data into a blue team's workflow enables faster response and better situational awarenessespecially in environments with critical infrastructure.
 
 ## 📘 What’s Next
 
-- 📦 **Automate Log Archival**: Set up cron jobs or Logstash pipelines to back up logs daily to an S3 bucket or cloud storage.
-- 🚨 **Enable Real-Time Alerting**: Integrate Slack, Microsoft Teams, or email alerts using Suricata or Filebeat.
-- 🧠 **Enrich Threat Data**: Correlate IPs against public blocklists (AbuseIPDB, AlienVault OTX, etc.) to improve context.
-- 📊 **Trend Reporting**: Build weekly dashboards to analyze shifts in attacker behavior and attack surface targeting.
-- 🔗 **SIEM Integration**: Export logs to Splunk, Sentinel, or Wazuh to enhance threat hunting capabilities.
+-  Automate alerting via webhook or Slack
+-  Correlate attacker IPs with public threat feeds
+-  Test integration with SIEM tools like Splunk or Sentinel
+-  Track long-term behavioral changes week to week
+-  Use honeypots in red/blue team training labs
 
 ---
 
-## 🧠 Author
+## 🧠 About the Author
 
 **Chalitha Handapangoda**  
 Cloud & Security Enthusiast  
 🔗 [LinkedIn](https://www.linkedin.com/in/chalitha-handapangoda/)  
 📝 [Medium](https://chalithah.medium.com)
+
